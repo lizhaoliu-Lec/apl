@@ -25,7 +25,7 @@ class MHDPA(nn.Module):
 
         self.memory_size = self.value_size * self.n_heads
         self.projection_size = self.n_heads * \
-            (2 * self.key_size + self.value_size)
+                               (2 * self.key_size + self.value_size)
         self.qkv_projector = nn.Linear(self.memory_size, self.projection_size)
         self.qkv_layernorm = nn.LayerNorm(
             [self.memory_slots, self.projection_size])

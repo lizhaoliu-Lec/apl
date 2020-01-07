@@ -27,6 +27,7 @@ NUM_LAYERS = 5
 USE_CUDA = True
 SAVE_FREQUENCY = 100
 
+
 def to_one_hot(y, n_dims=None):
     """ Take integer y (tensor or variable) with n dims and convert it to 1-hot representation with n+1 dims. """
     y_tensor = y.data if isinstance(y, torch.autograd.Variable) else y
@@ -49,6 +50,7 @@ def split_batch(batch, nshot, n_classes, n_per_class):
             [batch[b] for b in range(class_start + nshot, class_start + n_per_class)])
     return context, query
 
+
 def get_arguments():
     parser = argparse.ArgumentParser()
     parser.add_argument("--checkpoint", type=str)
@@ -65,6 +67,7 @@ def get_arguments():
     parser.add_argument("--use_cuda", type=bool, default=USE_CUDA)
     return parser.parse_args()
 
+
 def test_checkpoint():
     args = get_arguments()
     use_cuda = args.use_cuda and torch.cuda.is_available()
@@ -78,8 +81,8 @@ def test_checkpoint():
     enc.to(device)
     dec.to(device)
     memory = memory_store.MemoryStore(
-            args.memory_size, args.n_classes,
-            args.n_neighbours, args.query_embed_dim, device)
+        args.memory_size, args.n_classes,
+        args.n_neighbours, args.query_embed_dim, device)
     train_dataset = omniglot.RestrictedOmniglot(
         "data/Omniglot", args.n_classes, train=True, noise_std=0.1)
     test_dataset = omniglot.RestrictedOmniglot(
@@ -144,8 +147,8 @@ def test_checkpoint():
 
     print("APL (full) / no decoder (kernel) / no decoder (top1)")
     print("Final accuracy (last n_classes items): {:.3f} / {:.3f} / {:.3f}".format(
-            np.mean(accuracy[-n_classes:]), np.mean(ker_accuracy[-n_classes:]),
-            np.mean(top1_matches[-n_classes:])))
+        np.mean(accuracy[-n_classes:]), np.mean(ker_accuracy[-n_classes:]),
+        np.mean(top1_matches[-n_classes:])))
     print("Final avg. memory size {}".format(int(np.mean(memory_size[-n_classes:]))))
 
     # Now test the same batch but with a fixed context size.
@@ -194,7 +197,8 @@ def test_checkpoint():
 
     print("APL (full) / no decoder (kernel) / no decoder (top1)")
     print("Avg. accuracy: {:.3f} / {:.3f} / {:.3f}".format(
-            np.mean(accuracy), np.mean(ker_accuracy), np.mean(top1_matches)))
+        np.mean(accuracy), np.mean(ker_accuracy), np.mean(top1_matches)))
+
 
 if __name__ == "__main__":
     test_checkpoint()

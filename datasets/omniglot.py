@@ -9,7 +9,6 @@ from PIL import Image
 import numpy as np
 import os
 
-
 OMNIGLOT_TEST_CLASSES = ["Bengali", "Ge_ez", "Glagolitic", "Gurmukhi", "Kannada",
                          "Malayalam", "Manipuri", "Old_Church_Slavonic_(Cyrillic)", "Oriya", "Tibetan"]
 

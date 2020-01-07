@@ -15,7 +15,7 @@ class MemoryStore(object):
         self.memory_embeds = torch.zeros(
             (self.memory_size, self.embed_dim)).to(self.device)
         self.memory_labels = self.n_classes * \
-            torch.ones((self.memory_size,), dtype=torch.long).to(self.device)
+                             torch.ones((self.memory_size,), dtype=torch.long).to(self.device)
         self.write_pointer = 0
         self.added_memories = 0
 
@@ -92,7 +92,6 @@ class MemoryStore(object):
         self.memory_embeds = torch.zeros(
             (self.memory_size, self.embed_dim)).to(self.device)
         self.memory_labels = self.n_classes * \
-            torch.ones((self.memory_size,), dtype=torch.long).to(self.device)
+                             torch.ones((self.memory_size,), dtype=torch.long).to(self.device)
         self.write_pointer = 0
         self.added_memories = 0
-        

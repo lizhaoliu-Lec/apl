@@ -112,6 +112,7 @@ def apl_train(enc, dec, memory, dataset, device, batch_size, max_batches, nll_th
 
     return accuracy_list, nll_list, len(memory), next_max_batches
 
+
 def apl_test(enc, dec, memory, dataset, device, batch_size, max_batches, nll_threshold):
     enc.eval()
     dec.eval()
@@ -174,12 +175,12 @@ def run_omniglot():
     enc = models.Encoder().to(device)
     enc.apply(weights_init)
     dec = models.RSAFFDecoder(
-            args.n_classes, args.query_embed_dim, args.label_embed_dim,
-            args.n_neighbours, args.key_size, args.value_size, args.n_heads,
-            args.num_layers).to(device)
+        args.n_classes, args.query_embed_dim, args.label_embed_dim,
+        args.n_neighbours, args.key_size, args.value_size, args.n_heads,
+        args.num_layers).to(device)
     dec.apply(weights_init)
     memory = memory_store.MemoryStore(args.memory_size, args.n_classes,
-                         args.n_neighbours, args.query_embed_dim, device)
+                                      args.n_neighbours, args.query_embed_dim, device)
     train_dataset = omniglot.RestrictedOmniglot(
         "data/Omniglot", args.n_classes, train=True, noise_std=0.1)
     test_dataset = omniglot.RestrictedOmniglot(
